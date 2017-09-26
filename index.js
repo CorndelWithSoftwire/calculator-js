@@ -6,23 +6,28 @@ console.log('==============================');
 console.log('\nPlease enter the operator:');
 const operator = readline.prompt();
 
-console.log('\nPlease enter the first number:');
-const firstArgument = readline.prompt();
-const firstNumber = +firstArgument;
+console.log('How many numbers to you want to ' + operator + '?');
+const iterationsString = readline.prompt();
+const iterations = +iterationsString;
 
-console.log('\nPlease enter the second number:');
-const secondArgument = readline.prompt();
-const secondNumber = +secondArgument;
+let numbers = new Array(iterations);
+for (let ix = 0; ix < iterations; ix++) {
+    console.log('\nPlease enter number ' + (ix + 1) +  ':');
+    const argument = readline.prompt();
+    numbers[ix] = +argument;
+}
 
-let answer = 0;
-if (operator === '+') {
-    answer = firstNumber + secondNumber;
-} else if (operator === '-') {
-    answer = firstNumber - secondNumber;
-} else if (operator === '*') {
-    answer = firstNumber * secondNumber;
-} else if (operator === '/') {
-    answer = firstNumber / secondNumber;
+let answer = numbers[0];
+for (let ix = 1; ix < iterations; ix++) {
+    if (operator === '+') {
+        answer += numbers[ix];
+    } else if (operator === '-') {
+        answer -= numbers[ix];
+    } else if (operator === '*') {
+        answer *= numbers[ix];
+    } else if (operator === '/') {
+        answer /= numbers[ix];
+    }
 }
 
 console.log('\nThe answer is ' + answer);

@@ -1,33 +1,60 @@
 const readline = require('readline-sync');
 
-console.log('\nWelcome to the calculator!');
-console.log('==============================');
-
-console.log('\nPlease enter the operator:');
-const operator = readline.prompt();
-
-console.log('How many numbers to you want to ' + operator + '?');
-const iterationsString = readline.prompt();
-const iterations = +iterationsString;
-
-let numbers = new Array(iterations);
-for (let ix = 0; ix < iterations; ix++) {
-    console.log('\nPlease enter number ' + (ix + 1) +  ':');
-    const argument = readline.prompt();
-    numbers[ix] = +argument;
+function printWelcomeMessage() {
+    console.log('\nWelcome to the calculator!');
+    console.log('==============================');
 }
 
-let answer = numbers[0];
-for (let ix = 1; ix < iterations; ix++) {
-    if (operator === '+') {
-        answer += numbers[ix];
-    } else if (operator === '-') {
-        answer -= numbers[ix];
-    } else if (operator === '*') {
-        answer *= numbers[ix];
-    } else if (operator === '/') {
-        answer /= numbers[ix];
+function getStringInputWithPrompt(prompt) {
+    console.log('\n' + prompt);
+    return readline.prompt();
+}
+
+function getNumberInputWithPrompt(prompt) {
+    let response;
+    do {
+        response = +getStringInputWithPrompt(prompt);
+    } while (isNaN(response));
+    return response;
+}
+
+function getOperator() {
+    return getStringInputWithPrompt('Please enter the operator:');
+}
+
+function getNumberArray(operator) {
+    const iterations = getNumberInputWithPrompt('How many numbers do you want to ' + operator + '?');
+    let numbers = new Array(iterations);
+    for (let ix = 0; ix < iterations; ix++) {
+        numbers[ix] = getNumberInputWithPrompt('Please enter number ' + (ix + 1) + ':');
     }
+    return numbers;
 }
 
-console.log('\nThe answer is ' + answer);
+function calculateAnswer(operator, numbers) {
+    let answer = numbers[0];
+    for (let ix = 1; ix < numbers.length; ix++) {
+        if (operator === '+') {
+            answer += numbers[ix];
+        } else if (operator === '-') {
+            answer -= numbers[ix];
+        } else if (operator === '*') {
+            answer *= numbers[ix];
+        } else if (operator === '/') {
+            answer /= numbers[ix];
+        }
+    }
+    return answer;
+}
+
+function performOneCalculation() {
+    const operator = getOperator();
+    const numbers = getNumberArray(operator);
+    const answer = calculateAnswer(operator, numbers);
+    console.log('\nThe answer is ' + answer);
+}
+
+printWelcomeMessage();
+while (true) {
+    performOneCalculation();
+}

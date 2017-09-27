@@ -14,19 +14,15 @@ function getNumbers(operator) {
 }
 
 function calculateAnswer(operator, numbers) {
-    let answer = numbers[0];
-    for (let ix = 1; ix < numbers.length; ix++) {
-        if (operator === '+') {
-            answer += numbers[ix];
-        } else if (operator === '-') {
-            answer -= numbers[ix];
-        } else if (operator === '*') {
-            answer *= numbers[ix];
-        } else if (operator === '/') {
-            answer /= numbers[ix];
-        }
+    if (operator === '+') {
+        return numbers.reduce((acc, curr) => acc + curr, 0);
+    } else if (operator === '-') {
+        return numbers.slice(1).reduce((acc, curr) => acc - curr, numbers[0]);
+    } else if (operator === '*') {
+        return numbers.reduce((acc, curr) => acc * curr, 1);
+    } else if (operator === '/') {
+        return numbers.slice(1).filter(x => x !== 0).reduce((acc, curr) => acc / curr, numbers[0]);
     }
-    return answer;
 }
 
 exports.performOneCalculation = function() {

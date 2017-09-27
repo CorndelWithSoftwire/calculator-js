@@ -1,6 +1,5 @@
 const readline = require('readline-sync');
 
-
 function getStringWithPrompt(prompt) {
     console.log(`\n${prompt}`);
     return readline.prompt();

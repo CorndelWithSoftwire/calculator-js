@@ -11,6 +11,6 @@ exports.getNumberWithPrompt = function(prompt) {
     let response;
     do {
         response = +getStringWithPrompt(prompt);
-    } while (isNaN(response));
+    } while (isNaN(response) && (console.log(`${response} is not a number`) || true));
     return response;
 }

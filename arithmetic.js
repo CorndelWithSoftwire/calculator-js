@@ -1,7 +1,15 @@
 const userInput = require('./userInput');
 
+function operatorIsValid(operator) {
+    return ['+', '-', '*', '/'].includes(operator)
+}
+
 function getOperator() {
-    return userInput.getStringWithPrompt('Please enter the operator:');
+    let operator;
+    do {
+        operator = userInput.getStringWithPrompt('Please enter the operator:');
+    } while (!operatorIsValid(operator) && (console.log(`The operator ${operator} is not supported`) || true))
+    return operator;
 }
 
 function getNumbers(operator) {
@@ -30,10 +38,6 @@ function calculateAnswer(operator, numbers) {
 exports.performOneCalculation = function() {
     const operator = getOperator();
     const numbers = getNumbers(operator);
-    try {
-        const answer = calculateAnswer(operator, numbers);
-        console.log(`\nThe answer is ${answer}`);
-    } catch (e) {
-        console.log(`\n${e.message}`);
-    }
+    const answer = calculateAnswer(operator, numbers);
+    console.log(`\nThe answer is ${answer}`);
 }

@@ -24,5 +24,7 @@ while (true) {
         arithmetic.performOneCalculation();
     } else if (calculationMode === VOWEL_COUNTING_MODE) {
         vowelCounting.performOneCalculation();
+    } else {
+        console.log(`${calculationMode} is not a valid mode`);
     }
 }

@@ -11,7 +11,7 @@ function printWelcomeMessage() {
 }
 
 function getCalculationMode() {
-    console.log('Which calculator mode do you want?');
+    console.log('\nWhich calculator mode do you want?');
     return userInput.getStringWithPrompt(`\
  ${ARITHMETIC_MODE}) Arithmetic
  ${VOWEL_COUNTING_MODE}) Vowel counting`);

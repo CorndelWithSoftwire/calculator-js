@@ -22,12 +22,18 @@ function calculateAnswer(operator, numbers) {
         return numbers.reduce((acc, curr) => acc * curr, 1);
     } else if (operator === '/') {
         return numbers.slice(1).filter(x => x !== 0).reduce((acc, curr) => acc / curr, numbers[0]);
+    } else {
+        throw new Error(`The operator '${operator}' is not supported`);
     }
 }
 
 exports.performOneCalculation = function() {
     const operator = getOperator();
     const numbers = getNumbers(operator);
-    const answer = calculateAnswer(operator, numbers);
-    console.log(`\nThe answer is ${answer}`);
+    try {
+        const answer = calculateAnswer(operator, numbers);
+        console.log(`\nThe answer is ${answer}`);
+    } catch (e) {
+        console.log(`\n${e.message}`);
+    }
 }
